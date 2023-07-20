@@ -13,7 +13,7 @@
 <!-- /TOC -->
 
 # 1. cloudflare-r2-upload action script
-* This action uploads a file to Cloudflare R2 (or any other S3 provider)
+* This action uploads a file to Cloudflare R2 (or any other S3 Compatibility API)
 
 ## 1.1. Example usage
 ```

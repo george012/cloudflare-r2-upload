@@ -93,11 +93,15 @@ function git_handle() {
     && git tag -d v$pre_del_version_no
 }
 
+function alone_func {
+    npm install
+}
 
 if to_run "$1"; then
-    git_handle
-
-    echo "Complated"
+    alone_func \
+    && wait \
+    && git_handle \
+    && echo "Complated"
 else
     echo "Invalid argument"
 fi
