@@ -21,25 +21,24 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org
 
-      - name: NPM Install
+      - name: Build Ready
         run: |
           sudo apt update
           sudo apt install jq
           npm install
-        
-      - name: NPM CI
-        run: npm ci
+          npm ci
+          pre_release_version=$(jq -r '.version' package.json)
+          echo "PRE_RELEASE_VERSION=$pre_release_version" >> $GITHUB_ENV
 
       - name: Step GitHub release
         id: stepCreateRelease
         uses: ncipollo/release-action@v1
         with:
           skipIfReleaseExists: 'true'
-          tag: git for-each-ref --sort=-taggerdate --format '%(refname:short)' refs/tags | grep -v '^$' | sed -n '2p'
-          name: git for-each-ref --sort=-taggerdate --format '%(refname:short)' refs/tags | grep -v '^$' | sed -n '2p'
+          tag: ${{ env.PRE_RELEASE_VERSION }}
+          name: ${{ env.PRE_RELEASE_VERSION }}
 
       - name: Publish to NPM
-        # run: npm publish || true
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
