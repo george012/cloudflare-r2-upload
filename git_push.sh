@@ -88,7 +88,7 @@ function git_handle() {
     && git tag v$netx_version_no \
     && git push \
     && git push --tags \
-    && git tag -f latest $netx_version_no \
+    && git tag -f latest v$netx_version_no \
     && git push -f origin latest \
     && git tag -d v$pre_del_version_no
 }
