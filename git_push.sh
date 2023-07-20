@@ -42,9 +42,6 @@ function to_run() {
 
         versionStr="v${base}.${major}.${minor}"
         return 0
-    elif [ "$1" == "get_pre_del_tag_name" ]; then
-        pre_tag=$(get_pre_version_no "$CurrentVersionString")
-        get_pre_version_no "$pre_tag"
     else
       return 1
     fi
@@ -100,13 +97,24 @@ function alone_func {
     npm install
 }
 
-if to_run "$1"; then
-    alone_func \
-    && wait \
-    && git_handle \
-    && echo "Complated"
-else
-    echo "Invalid argument"
-fi
 
+handle_input(){
+    if [[ $1 == "-get_pre_del_tag_name" ]]; then
+        pre_tag=$(get_pre_version_no "$CurrentVersionString")
+        echo $(get_pre_version_no "$pre_tag")
+    elif [ -z "$1" ] || [ "$1" == "auto" ]; then
+        if to_run "$1"; then
+            alone_func \
+            && wait \
+            && git_handle \
+            && echo "Complated"
+        else
+            echo "Invalid argument normal"
+        fi
+    else
+        echo "Invalid argument"
+    fi
+}
+
+handle_input "$@"
 
