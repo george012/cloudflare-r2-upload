@@ -28,7 +28,7 @@ jobs:
           npm install
           npm ci
           pre_release_version=$(jq -r '.version' package.json)
-          echo "PRE_RELEASE_VERSION=$pre_release_version" >> $GITHUB_ENV
+          echo "PRE_RELEASE_VERSION=v$pre_release_version" >> $GITHUB_ENV
 
       - name: Step GitHub release
         id: stepCreateRelease
@@ -61,8 +61,8 @@ jobs:
 
       - name: Set APP_VERSION env
         run: |
-          sudo chmod a+x git_push.sh
-          pre_del_tag=$(./git_push.sh -get_pre_del_tag_name)
+          sudo chmod a+x git_push.sh \
+          && pre_del_tag=$(./git_push.sh -get_pre_del_tag_name) \
           && echo APP_OLD_VERSION=v${pre_del_tag} >> ${GITHUB_ENV}
 
       - name: Remove Old Release
