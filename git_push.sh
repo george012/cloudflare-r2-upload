@@ -75,13 +75,15 @@ function get_pre_version_no {
     echo $pre_v_no
 }
 
-function git_handle() {
-    current_version_no=${CurrentVersionString//v/}
-    netx_version_no=${versionStr//v/}
-
+function git_handle_ready() {
+    local netx_version_no=${versionStr//v/}
     jq ".version = \"${netx_version_no}\"" $VersionFile > temp.json && mv temp.json $VersionFile
+}
 
-    pre_del_version_no=$(get_pre_version_no "$current_version_no")
+function git_handle_push() {
+    local current_version_no=${CurrentVersionString//v/}
+    local netx_version_no=${versionStr//v/}
+    local pre_del_version_no=$(get_pre_version_no "$current_version_no")
 
     git add . \
     && git commit -m "Update v${netx_version_no}"  \
@@ -102,9 +104,11 @@ handle_input(){
         pre_tag=$(get_pre_version_no "$CurrentVersionString")
         echo $(get_pre_version_no "$pre_tag")
     elif [ -z "$1" ] || [ "$1" == "auto" ]; then
-        alone_func
+        
         if to_run "$1"; then
-            git_handle
+            git_handle_ready
+            alone_func
+            git_handle_push
             echo "Complated"
         else
             echo "Invalid argument normal"
