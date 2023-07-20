@@ -23,7 +23,7 @@ function to_run() {
             versionStr=v${inputString}
         fi
         return 0
-    elif [ "$1" == "auto" ] || [ "$1" == "" ]; then
+    elif [ "$1" == "auto" ]; then
         baseStr=$(echo $CurrentVersionString | cut -d'.' -f1)     # Get the base version (v0)
         base=${baseStr//v/}                                       # Get the base version (0)
         major=$(echo $CurrentVersionString | cut -d'.' -f2)       # Get the major version (0)
@@ -42,6 +42,9 @@ function to_run() {
 
         versionStr="v${base}.${major}.${minor}"
         return 0
+    elif [ "$1" == "get_pre_del_tag_name" ]; then
+        pre_tag=$(get_pre_version_no "$CurrentVersionString")
+        get_pre_version_no "$pre_tag"
     else
       return 1
     fi
