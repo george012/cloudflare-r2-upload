@@ -1,0 +1,28 @@
+name: 'Cloudflare R2 Upload'
+description: 'Upload a file to CloudFlare R2 Frome release it'
+branding:
+  icon: 'archive'
+  color: 'blue'
+inputs:
+  endpoint:
+    description: 'S3 Provider API endpoint'
+    required: true
+  accesskeyid:
+    description: 'S3 Provideraccess key ID'
+    required: true
+  secretaccesskey:
+    description: 'S3 Provideraccess key'
+    required: true
+  bucket:
+    description: 'This.... is a BUCKET. DEAR GOD.'
+    required: true
+  file:
+    description: 'File you would like to upload'
+    required: true
+  destination:
+    description: 'S3 Provider API over filepath (defaults to the name of the file)'
+    required: false
+    default: ""
+runs:
+  using: 'node18'
+  main: 'index.mjs'
