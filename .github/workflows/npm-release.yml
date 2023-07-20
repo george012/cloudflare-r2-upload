@@ -1,0 +1,38 @@
+name: NPM Release
+
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+        
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org
+
+      - name: NPM Install
+        run: |
+          sudo apt update
+          sudo apt install jq
+          npm install
+        
+      - name: NPM CI
+        run: npm ci
+        
+      - name: Publish to NPM
+        # run: npm publish || true
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          

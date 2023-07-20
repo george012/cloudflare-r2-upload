@@ -5,13 +5,13 @@ branding:
   color: 'blue'
 inputs:
   endpoint:
-    description: 'S3 Provider API endpoint'
+    description: 'S3 Compatibility API endpoint'
     required: true
   accesskeyid:
-    description: 'S3 Provideraccess key ID'
+    description: 'S3 Compatibility Access key ID'
     required: true
   secretaccesskey:
-    description: 'S3 Provideraccess key'
+    description: 'S3 Compatibility Access key'
     required: true
   bucket:
     description: 'This.... is a BUCKET. DEAR GOD.'
@@ -20,7 +20,7 @@ inputs:
     description: 'File you would like to upload'
     required: true
   destination:
-    description: 'S3 Provider API over filepath (defaults to the name of the file)'
+    description: 'S3 Compatibility API over filepath (defaults to the name of the file)'
     required: false
     default: ""
 runs:
