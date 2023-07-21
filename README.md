@@ -1,18 +1,20 @@
+cloudflare-r2-upload action script
+
 <!-- TOC -->
 
-- [1. cloudflare-r2-upload action script](#1-cloudflare-r2-upload-action-script)
-    - [1.1. Example usage](#11-example-usage)
-    - [1.2. Inputs](#12-inputs)
-        - [1.2.1. `endpoint`](#121-endpoint)
-        - [1.2.2. `accesskeyid`](#122-accesskeyid)
-        - [1.2.3. `secretaccesskey`](#123-secretaccesskey)
-        - [1.2.4. `bucket`](#124-bucket)
-        - [1.2.5. `file`](#125-file)
-        - [1.2.6. `destination`](#126-destination)
+- [1. Description](#1-description)
+  - [1.1. Example usage](#11-example-usage)
+  - [1.2. Inputs](#12-inputs)
+    - [1.2.1. `endpoint`](#121-endpoint)
+    - [1.2.2. `accesskeyid`](#122-accesskeyid)
+    - [1.2.3. `secretaccesskey`](#123-secretaccesskey)
+    - [1.2.4. `bucket`](#124-bucket)
+    - [1.2.5. `file`](#125-file)
+    - [1.2.6. `destination`](#126-destination)
 
 <!-- /TOC -->
 
-# 1. cloudflare-r2-upload action script
+# 1. Description 
 * This action uploads a file to Cloudflare R2 (or any other S3 Compatibility API)
 
 ## 1.1. Example usage

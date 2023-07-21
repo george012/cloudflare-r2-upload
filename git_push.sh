@@ -77,7 +77,9 @@ function get_pre_version_no {
 
 function git_handle_ready() {
     local netx_version_no=${versionStr//v/}
-    jq ".version = \"${netx_version_no}\"" $VersionFile > temp.json && mv temp.json $VersionFile
+    jq ".version = \"${netx_version_no}\"" $VersionFile > temp.json \
+    && dos2unix temp.json \
+    && mv temp.json $VersionFile
 }
 
 function git_handle_push() {
