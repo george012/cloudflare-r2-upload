@@ -11,21 +11,21 @@ CURRENT_VERSION=$(jq -r '.version' $VersionFile)
 
 NEXT_VERSION=""
 
-OSTYPE="Unknown"
+OS_TYPE="Unknown"
 GetOSType() {
     uNames=`uname -s`
     osName=${uNames: 0: 4}
     if [ "$osName" == "Darw" ] # Darwin
     then
-        OSTYPE="Darwin"
+        OS_TYPE="Darwin"
     elif [ "$osName" == "Linu" ] # Linux
     then
-        OSTYPE="Linux"
+        OS_TYPE="Linux"
     elif [ "$osName" == "MING" ] # MINGW, windows, git-bash
     then
-        OSTYPE="Windows"
+        OS_TYPE="Windows"
     else
-        OSTYPE="Unknown"
+        OS_TYPE="Unknown"
     fi
 }
 GetOSType
@@ -101,30 +101,9 @@ function git_handle_ready() {
 
     local netx_version_no=${NEXT_VERSION//v/}
 
-    # 检查dos2unix是否存在，如果不存在，尝试安装
-    case "$(uname -s)" in
-        Linux)
-            if [[ -f "/etc/debian_version" ]]; then
-                sudo apt-get update
-                sudo apt-get install -y dos2unix
-            elif [[ -f "/etc/redhat-release" ]]; then
-                sudo yum install -y dos2unix
-            else
-                echo "Unknown Linux distribution. Please install dos2unix manually."
-            fi
-            ;;
-
-        Darwin) # macOS
-            brew install dos2unix
-            ;;
-        *)
-            echo "Unsupported OS. Please install dos2unix manually."
-            ;;
-    esac
-
     jq ".version = \"${netx_version_no}\"" $VersionFile > temp.json
 
-    if command -v dos2unix &> /dev/null; then
+    if [[ $OS_TYPE == "Darwin" ]]; then
         dos2unix temp.json
     fi
 
