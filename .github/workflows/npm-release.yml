@@ -62,6 +62,8 @@ jobs:
       - name: Set APP_VERSION env
         run: |
           APP_VERSION=$(echo ${GITHUB_REF} | rev | cut -d'/' -f 1 | rev ) \
+          
+          echo a_v $APP_VERSION
 
           function get_pre_del_tag {
               local v_str=$1
