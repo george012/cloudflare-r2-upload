@@ -1,7 +1,7 @@
 name: NPM Release
 
 env:
-  ProductName: cloudflare-r2-upload
+  ProductName: cloudflare_r2_upload_action
 
 on:
   push:

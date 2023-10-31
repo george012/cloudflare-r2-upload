@@ -1,20 +1,23 @@
 {
   "dependencies": {
-    "@actions/core": "^1",
-    "@actions/github": "^6",
-    "@aws-sdk/client-s3": "^3"
+    "@aws-sdk/client-s3": "^3",
+    "dotenv": "^16",
+    "md5": "^2"
   },
-  "name": "cloudflare-r2-upload",
-  "version": "1.0.17",
-  "main": "index.js",
+  "name": "cloudflare_r2_upload_action",
+  "packageManager": "yarn@3.2.1",
+  "version": "1.0.18",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "build": "tsc",
+    "esbuild": "esbuild --bundle"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/george012/cloudflare-r2-upload.git"
+    "url": "https://github.com/george012/cloudflare_r2_upload_action.git"
   },
-  "homepage": "https://github.com/george012/cloudflare-r2-upload",
+  "homepage": "https://github.com/george012/cloudflare_r2_upload_action",
   "keywords": [
     "CloudflareR2",
     "Github Actions",
@@ -24,5 +27,9 @@
   ],
   "author": "",
   "license": "MIT",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "@types/md5": "^2"
+  }
 }

@@ -2,7 +2,7 @@
 
 set -e
 
-ProductName=cloudflare-r2-upload
+ProductName=cloudflare_r2_upload_action
 Product_version_key="ProjectVersion"
 REPO_PFEX=george012/$ProductName
 VersionFile=./package.json
@@ -133,7 +133,8 @@ function git_handle_push() {
 }
 
 function alone_func {
-    npm install
+    yarn install
+    npm run build
 }
 
 
